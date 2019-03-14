@@ -158,7 +158,5 @@ abstract class Filtr implements BufferedImageOp {
     {
         return null;
     }
-
-    
     
 }

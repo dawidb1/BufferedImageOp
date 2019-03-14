@@ -378,7 +378,7 @@ public class Util {
      */
     public static enum typFiltra
     {
-        SKALUJ, ODBIJ_POZIOMO, ODBIJ_PIONOWO, OPISZ, MNOZ;
+        SKALUJ, ODBIJ_POZIOMO, ODBIJ_PIONOWO, OPISZ, MNOZ, NIC 
     }
     
 
@@ -429,6 +429,8 @@ public class Util {
                  // ten filtr zależy od skali, więc za każdym razem 
                  // zwracany jest nowy                
                 return new FiltrSkalujacy(parametry);
+            case NIC:
+                return new FiltrNicNieRobiacy(parametry);
                          
             default:
                 throw new IllegalArgumentException("Ten typ filtra nie jest dostępny");
@@ -478,6 +480,34 @@ public class Util {
     // jej definicja jest prywatna itp. Ilekolwiek metody nie byłoby dla niej
     // zdefiniowanych tutaj, na zewnątrz widoczne będą tylko te 4 określone
     // przez interfejs BufferedImageOp.
+    
+    static private class FiltrNicNieRobiacy extends Filtr 
+    {
+        FiltrNicNieRobiacy(HashMap<String, String> parametry)
+        {
+            System.out.println("Parametry:" + parametry);
+        }
+          
+        FiltrNicNieRobiacy() 
+        {
+            this(null);
+        }
+
+        @Override
+        public BufferedImage filter(BufferedImage src, BufferedImage dest) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public Rectangle2D getBounds2D(BufferedImage src) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public Point2D getPoint2D(Point2D srcPt, Point2D dstPt) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+    }
     
     static private class FiltrSkalujacy extends Filtr 
     {
